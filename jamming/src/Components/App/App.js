@@ -7,6 +7,8 @@ import Playlist from "../Playlist/Playlist";
 class App extends React.Component {
   constructor(props) {
     super(props);
+    //As with all methods that we pass in React, we must first bind this to our new method
+    this.addTrack = this.addTrack.bind(this);
 
     this.state = {
       searchResults: [
@@ -24,7 +26,28 @@ class App extends React.Component {
           id: "2445",
         },
       ],
+      playlistName: "best hit 2000s",
+      playlistTracks: [
+        { name: "john", artist: "bow", album: "not water", id: "4" },
+        { name: "john", artist: "bow", album: "not water", id: "5" },
+        { name: "john", artist: "bow", album: "not water", id: "6" },
+      ],
+
     };
+  }
+
+
+  addTrack(track) {
+    let tracks = this.state.playlistTracks;
+    // Use the track’s id property to check if the current song is in the playlistTracks state.
+    if (tracks.find((savedTrack) => savedTrack.id === track.id)) {
+      return;
+    } else {
+      // If the id is new, add the song to the end of the playlist.
+      tracks.push(track);
+    }
+    // Set the new state of the playlist
+    this.setState({ playlistTracks: tracks });
   }
 
   render() {
@@ -36,8 +59,11 @@ class App extends React.Component {
         <div className="App">
           <SearchBar />
           <div className="App-playlist">
-            <SearchResults searchResults={this.state.searchResults} />
-            <Playlist />
+            <SearchResults onAdd={this.addTrack} searchResults={this.state.searchResults} />
+            <Playlist
+              playlistname={this.state.playlistName}
+              playlistTracks={this.state.playlistTracks}
+            />
           </div>
         </div>
       </div>
