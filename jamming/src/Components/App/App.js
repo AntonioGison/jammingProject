@@ -9,7 +9,8 @@ class App extends React.Component {
     super(props);
     //As with all methods that we pass in React, we must first bind this to our new method
     this.addTrack = this.addTrack.bind(this);
-
+    this.removeTrack = this.removeTrack.bind(this);
+    
     this.state = {
       searchResults: [
         {
@@ -34,6 +35,21 @@ class App extends React.Component {
       ],
 
     };
+  }
+
+
+  // removeTrack with the following functionality:
+
+  // Accepts a track argument
+  // Uses the track’s id property to filter it out of playlistTracks
+  // Sets the new state of the playlist
+  removeTrack(track){
+    let tracks = this.state.playlistTracks;
+
+    let updatedTracks = tracks.filter((track2Remove) => track2Remove.id !== track.id);
+
+    this.setState({ playlistTracks: updatedTracks });
+
   }
 
 

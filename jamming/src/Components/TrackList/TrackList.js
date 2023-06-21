@@ -3,13 +3,12 @@ import "./TrackList.css";
 import Track from "../Track/Track";
 
 class TrackList extends React.Component {
-    //!!this.props.tracks &&
   render() {
 
     return (
       <div className="TrackList">
         { !!this.props.tracks && this.props.tracks.map((track) => {
-          return <Track track={track} key={track.id} />;
+          return <Track onAdd={this.props.onAdd} track={track} key={track.id} />;
         })}
       </div>
     );
