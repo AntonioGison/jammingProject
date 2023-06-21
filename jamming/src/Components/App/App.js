@@ -10,6 +10,8 @@ class App extends React.Component {
     //As with all methods that we pass in React, we must first bind this to our new method
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
+    this.updatePlaylistName = this.updatePlaylistName.bind(this);
+    this.savePlayList = this.savePlayList.bind(this);
 
     this.state = {
       searchResults: [
@@ -28,6 +30,7 @@ class App extends React.Component {
         },
       ],
       playlistName: "best hit 2000s",
+
       playlistTracks: [
         { name: "john", artist: "bow", album: "not water", id: "4" },
         { name: "john", artist: "bow", album: "not water", id: "5" },
@@ -37,6 +40,17 @@ class App extends React.Component {
     };
   }
 
+  savePlayList(){
+    console.log('test button trigger');
+    const trackUris = this.state.playlistTracks.map(track => track.uri);
+  }
+
+
+  updatePlaylistName(name){
+ 
+    this.setState({ playlistName: name});
+
+  }
 
 
   removeTrack(track){
@@ -74,8 +88,10 @@ class App extends React.Component {
           <div className="App-playlist">
             <SearchResults onAdd={this.addTrack} searchResults={this.state.searchResults} />
             <Playlist
+              onSave={this.savePlayList}
+              onNameChange={this.updatePlaylistName}
               onRemove={this.removeTrack}
-              playlistname={this.state.playlistName}
+              playlistName={this.state.playlistName}
               playlistTracks={this.state.playlistTracks}
             />
           </div>
