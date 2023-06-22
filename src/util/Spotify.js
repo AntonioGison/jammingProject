@@ -17,7 +17,7 @@ const Spotify = {
 
     if (accessTokenMatch && expireInMatch) {
       //Set the access token value
-      accessTokenMatch = accessTokenMatch[1];
+      accessToken = accessTokenMatch[1];
       const expiresIn = Number(expireInMatch[1]);
 
       //Clear the parameters from the URL, so the app doesn’t try grabbing the access token after it has expired
