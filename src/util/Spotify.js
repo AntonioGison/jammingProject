@@ -36,7 +36,7 @@ const Spotify = {
       headers: { Authorization: `Bearer ${accessToken}` },
     })
       .then((response) => {
-        response.json();
+       return response.json();
       })
       .then((jsonResponse) => {
         if (!jsonResponse.tracks) {
@@ -63,8 +63,7 @@ const Spotify = {
     let userId;
 
     // a request that returns the user’s Spotify username
-    return fetch("https://api.spotify.com/v1/me", { 
-        headers: headers })
+    return fetch("https://api.spotify.com/v1/me", { headers: headers })
       .then((response) => {
         response.json();
       })
