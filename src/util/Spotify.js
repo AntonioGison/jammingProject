@@ -65,7 +65,7 @@ const Spotify = {
     // a request that returns the user’s Spotify username
     return fetch("https://api.spotify.com/v1/me", { headers: headers })
       .then((response) => {
-        response.json();
+       return response.json();
       })
       .then((jsonResponse) => {
         userId = jsonResponse.id;
@@ -80,11 +80,12 @@ const Spotify = {
       })
       .then(
         response => {
-            response.json();
+          return response.json();
         }
       )
       .then(
         jsonResponse =>{
+          console.log(`test ${jsonResponse}`);
             let playlistID = jsonResponse.id;
 
             //a POST request that creates a new playlist in the user’s account and returns a playlist ID
